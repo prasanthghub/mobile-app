@@ -1,15 +1,15 @@
 pipeline {
     agent any
     environment {
-        REGISTRY = "your-docker-registry.com"
-        IMAGE_NAME = "your-app"
-        K8S_REPO = "git@github.com:yourorg/k8s-manifests.git"
+        REGISTRY = "https://hub.docker.com/repositories/prasanthmeduri"
+        IMAGE_NAME = "mobile-app"
+        K8S_REPO = "https://github.com/prasanthghub/mobile-app/blob/main/Kubernetes"
         BRANCH = "main"
     }
     stages {
         stage('Checkout Source') {
             steps {
-                git branch: "${BRANCH}", url: 'git@github.com:yourorg/your-app.git'
+                git branch: "${main}", url: 'https://github.com/prasanthghub/mobile-app'
             }
         }
         stage('Quality Checks') {
