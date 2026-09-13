@@ -1,0 +1,22 @@
+import React, { useState } from 'react';
+import { View, Text, Button, Linking } from 'react-native';
+
+export default function DevOpsDashboard() {
+  const [status, setStatus] = useState("Idle");
+
+  const triggerBuild = async () => {
+    const response = await fetch("https://jenkins.example.com/job/your-app/build", {
+      method: "POST",
+      headers: { "Authorization": "Bearer YOUR_JENKINS_TOKEN" }
+    });
+    setStatus(response.ok ? "Build Triggered" : "Failed");
+  };
+
+  return (
+    <View style={{ padding: 20 }}>
+      <Text>Build Status: {status}</Text>
+      <Button title="Trigger Jenkins Build" onPress={triggerBuild} />
+      <Button title="Open Deployed App" onPress={() => Linking.openURL("https://app.example.com")} />
+    </View>
+  );
+}
